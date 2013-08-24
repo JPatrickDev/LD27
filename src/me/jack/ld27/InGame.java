@@ -22,6 +22,7 @@ public class InGame extends BasicGameState{
     private static Renderer renderer;
 
     public Level currentLevel;
+
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.renderer = new Renderer(this);

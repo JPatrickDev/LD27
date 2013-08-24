@@ -1,5 +1,6 @@
 package me.jack.ld27.Level;
 
+import me.jack.JEngine.Level.Camera;
 import me.jack.ld27.Entity.EntityPlayer;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Level.Items.Blocks;
@@ -22,12 +23,15 @@ public class Level {
 
     private EntityPlayer player;
 
+    public Camera camera;
+
     public ArrayList<Rectangle> collisions = new ArrayList<Rectangle>();
 
     public Level(int width, int height) {
         this.width = width;
         this.height = height;
         tiles = new Block[width*height];
+        camera = new Camera(0,0,800,600,32);
     }
 
     public void setPlayer(EntityPlayer p){
@@ -45,7 +49,7 @@ public class Level {
         block.setY(y);
         tiles[x+y*width] = block;
         if(block.isSolid()){
-            collisions.add(new Rectangle(x * 32,y * 32,32,32));
+            collisions.add(new Rectangle(x * 32, y * 32, 32, 32));
         }
     }
 
@@ -60,11 +64,12 @@ public class Level {
 
     public void update() {
         getPlayer().update();
+        camera.centerOnPlayer(getPlayer().getX(),getPlayer().getY(),width,height);
 
     }
 
     public boolean canMove(Rectangle hitbox){
-        if(hitbox.x > (800-hitbox.width) ||hitbox.x < 0)return false;
+        if(hitbox.x > (width*32-hitbox.width) ||hitbox.x < 0)return false;
         if(hitbox.y > (600 - hitbox.height) ||hitbox.y < 0)return false;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}

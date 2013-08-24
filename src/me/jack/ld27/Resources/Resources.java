@@ -40,6 +40,8 @@ public class Resources {
     public static void populateImages(){
         addImageResource(1,"floor");
         addImageResource(2,"player");
+        addImageResource(3,"gate1");
+        addImageResource(4,"gate2");
     }
 
     public static void addImageResource(int i, String path) {

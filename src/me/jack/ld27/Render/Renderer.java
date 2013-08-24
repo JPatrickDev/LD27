@@ -33,11 +33,11 @@ public class Renderer {
             Image image = Resources.getImageResource(drawable.getResourceId());
             if (drawable instanceof Block) {
                 Block b = (Block) drawable;
-                g.drawImage(image, b.getX() *32, b.getY() *32);
+                g.drawImage(image, (b.getX() *32) - parent.currentLevel.camera.x, (b.getY() *32) - parent.currentLevel.camera.y);
             }
             if(drawable instanceof Entity){
                 Entity e = (Entity)drawable;
-                g.drawImage(image,e.getX(),e.getY());
+                g.drawImage(image,e.getX() - parent.currentLevel.camera.x,e.getY() - parent.currentLevel.camera.y);
             }
 
         }

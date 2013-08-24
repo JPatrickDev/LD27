@@ -2,6 +2,7 @@ package me.jack.ld27.Level.Generation;
 
 import me.jack.ld27.Entity.EntityPlayer;
 import me.jack.ld27.Level.Items.Floor;
+import me.jack.ld27.Level.Items.Gate;
 import me.jack.ld27.Level.Level;
 
 /**
@@ -24,6 +25,8 @@ public class LevelGen {
             if(x < 10)continue;
             level.setBlock(x, y, new Floor());
         }
+
+        level.setBlock(5,5,new Gate());
         level.setPlayer(new EntityPlayer(50, 50, level));
         return level;
     }
