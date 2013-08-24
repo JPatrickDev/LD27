@@ -42,6 +42,7 @@ public class Resources {
         addImageResource(2,"player");
         addImageResource(3,"gate1");
         addImageResource(4,"gate2");
+        addImageResource(5,"box");
     }
 
     public static void addImageResource(int i, String path) {

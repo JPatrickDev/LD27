@@ -17,13 +17,9 @@ public abstract class Entity extends Gravity {
     private float xVelocity;
     private float yVelocity;
 
-    private int moveSpeed = 5;
     public Level parent;
     public int width = 32;
     public int height = 32;
-
-    private float xSpeed;
-    private float ySpeed;
 
     public Entity(int x, int y, Level parent) {
         this.x = x;
@@ -91,5 +87,10 @@ public abstract class Entity extends Gravity {
 
     public float getYVelocity() {
         return yVelocity;
+    }
+
+    public  void killAllVelocity(){
+        xVelocity = 0;
+        yVelocity = 0;
     }
 }

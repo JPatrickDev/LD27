@@ -35,6 +35,7 @@ public class Renderer {
         for (Drawable drawable : drawables) {
             if(drawable == null)continue;
             Image image = Resources.getImageResource(drawable.getResourceId());
+
             if (drawable instanceof Block) {
                 Block b = (Block) drawable;
                 g.drawImage(image, (b.getX() *32) - parent.currentLevel.camera.x, (b.getY() *32) - parent.currentLevel.camera.y);
