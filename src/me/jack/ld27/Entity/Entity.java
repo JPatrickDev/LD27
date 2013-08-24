@@ -3,7 +3,7 @@ package me.jack.ld27.Entity;
 import me.jack.ld27.Level.Gravity;
 import me.jack.ld27.Level.Level;
 
-import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 
 /**
  * Author: Jack
@@ -11,14 +11,19 @@ import java.awt.Rectangle;
  */
 public abstract class Entity extends Gravity {
 
-    private int x;
-    private int y;
+    private float x;
+    private float y;
 
-    private int xVelocity;
-    private int yVelocity;
+    private float xVelocity;
+    private float yVelocity;
 
     private int moveSpeed = 5;
     public Level parent;
+    public int width = 32;
+    public int height = 32;
+
+    private float xSpeed;
+    private float ySpeed;
 
     public Entity(int x, int y, Level parent) {
         this.x = x;
@@ -27,28 +32,29 @@ public abstract class Entity extends Gravity {
     }
 
     public void update() {
-
-      //  if (xVelocity > 150) xVelocity = 150;
-        //if (yVelocity > 150) yVelocity = 150;
-
-        if (parent.canMove(getNewHitbox(xVelocity, 0))) {
-          x+=xVelocity;
-        } else {
+        if (xVelocity > 50) xVelocity = 50;
+        if (yVelocity > 50) yVelocity = 50;
+        if (parent.canMove(getNewHitbox(xVelocity,0))) {
+            x += xVelocity;
+        }else{
             xVelocity = 0;
         }
-        if (parent.canMove(getNewHitbox(0, yVelocity)) && yVelocity != 0) {
-           y+=yVelocity;
-        } else {
+
+        if(parent.canMove(getNewHitbox(0,yVelocity))){
+            y += yVelocity;
+        }else{
             yVelocity = 0;
         }
+
 
         xVelocity *= 0.2;
         yVelocity *= 0.2;
 
+        xVelocity = Math.round(xVelocity * 100) / 100;
+        yVelocity = Math.round(yVelocity * 100) / 100;
     }
 
-
-    public int getY() {
+    public float getY() {
         return y;
     }
 
@@ -56,7 +62,7 @@ public abstract class Entity extends Gravity {
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
@@ -64,16 +70,16 @@ public abstract class Entity extends Gravity {
         this.x = x;
     }
 
-    public void addY(int y) {
+    public void addY(float y) {
         this.yVelocity += y;
     }
 
-    public void addX(int x) {
+    public void addX(float x) {
         this.xVelocity += x;
     }
 
-    public Rectangle getNewHitbox(int x, int y) {
-        return new Rectangle(this.x + x, this.y + y, 32, 32);
+    public Rectangle2D.Float getNewHitbox(float x, float y) {
+        return new Rectangle2D.Float(this.x + x, this.y + y, width, height);
     }
 
     public void killVelocity() {
@@ -83,7 +89,7 @@ public abstract class Entity extends Gravity {
     }
 
 
-    public int getYVelocity() {
+    public float getYVelocity() {
         return yVelocity;
     }
 }

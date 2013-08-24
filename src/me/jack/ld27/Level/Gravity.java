@@ -24,8 +24,10 @@ public abstract class Gravity {
           e.addY(fallingSpeed);
             fallingSpeed+=1;
             falling = true;
+            System.out.println("Falling");
         }
         else{
+
             falling = false;
             e.killVelocity();
             fallingSpeed = gravity;

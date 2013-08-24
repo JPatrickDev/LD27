@@ -4,11 +4,14 @@ import me.jack.ld27.Entity.Entity;
 import me.jack.ld27.InGame;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Resources.Resources;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class Renderer {
         this.parent = parent;
     }
 
+    public static boolean debug = true;
     public void render(Graphics g, GameContainer container) {
 
         for (Drawable drawable : drawables) {
@@ -40,6 +44,12 @@ public class Renderer {
                 g.drawImage(image,e.getX() - parent.currentLevel.camera.x,e.getY() - parent.currentLevel.camera.y);
             }
 
+        }
+        if(debug){
+           Rectangle2D.Float rect =  parent.currentLevel.getPlayer().getNewHitbox(0,0);
+            g.setColor(Color.red);
+            g.drawRect(rect.x - parent.currentLevel.camera.x,rect.y - parent.currentLevel.camera.y,rect.width,rect.height);
+            g.setColor(Color.white);
         }
     }
 

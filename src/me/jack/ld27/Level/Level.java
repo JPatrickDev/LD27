@@ -7,6 +7,7 @@ import me.jack.ld27.Level.Items.Blocks;
 import me.jack.ld27.Render.Drawable;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,13 +65,13 @@ public class Level {
 
     public void update() {
         getPlayer().update();
-        camera.centerOnPlayer(getPlayer().getX(),getPlayer().getY(),width,height);
+        camera.centerOnPlayer((int)getPlayer().getX(),(int)getPlayer().getY(),width,height);
 
     }
 
-    public boolean canMove(Rectangle hitbox){
-        if(hitbox.x > (width*32-hitbox.width) ||hitbox.x < 0)return false;
-        if(hitbox.y > (600 - hitbox.height) ||hitbox.y < 0)return false;
+    public boolean canMove(Rectangle2D.Float hitbox){
+        if((int)hitbox.x > (width*32-(int)hitbox.width) ||(int)hitbox.x < 0)return false;
+        if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return false;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}
         }
