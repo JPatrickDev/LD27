@@ -64,6 +64,8 @@ public class Level {
     }
 
     public boolean canMove(Rectangle hitbox){
+        if(hitbox.x > (800-hitbox.width) ||hitbox.x < 0)return false;
+        if(hitbox.y > (600 - hitbox.height) ||hitbox.y < 0)return false;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}
         }

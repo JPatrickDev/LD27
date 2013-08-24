@@ -18,11 +18,23 @@ public class EntityPlayer extends Entity implements Drawable{
     public void update() {
         super.update();
         this.apply(this);
-        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-            this.addY(-25);
-        }
+        checkMovement();
+    }
+    private boolean floating()
+    {
+        return !parent.canMove(getNewHitbox(0,1));
     }
 
+    //TODO: Gravity needs to make player flush with the floor, not floating a bit
+    private void checkMovement(){
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !falling && !floating()){
+            if(getYVelocity() <= 0 )
+            this.addY(-30);
+        }
+
+        if(Keyboard.isKeyDown(Keyboard.KEY_A))this.addX(-5);
+        if(Keyboard.isKeyDown(Keyboard.KEY_D))this.addX(5);
+    }
     @Override
     public String getResourceId() {
         return "player";

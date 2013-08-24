@@ -17,22 +17,33 @@ public abstract class Entity extends Gravity {
     private int xVelocity;
     private int yVelocity;
 
+    private int moveSpeed = 5;
     public Level parent;
 
-    public Entity(int x, int y,Level parent) {
+    public Entity(int x, int y, Level parent) {
         this.x = x;
         this.y = y;
         this.parent = parent;
     }
 
-    public void update(){
-        if(xVelocity > 50)xVelocity = 50;
-        if(yVelocity > 50)yVelocity = 50;
-        x+=xVelocity;
-        y+=yVelocity;
+    public void update() {
 
-        xVelocity*=0.2;
-        yVelocity*=0.2;
+      //  if (xVelocity > 150) xVelocity = 150;
+        //if (yVelocity > 150) yVelocity = 150;
+
+        if (parent.canMove(getNewHitbox(xVelocity, 0))) {
+          x+=xVelocity;
+        } else {
+            xVelocity = 0;
+        }
+        if (parent.canMove(getNewHitbox(0, yVelocity)) && yVelocity != 0) {
+           y+=yVelocity;
+        } else {
+            yVelocity = 0;
+        }
+
+        xVelocity *= 0.2;
+        yVelocity *= 0.2;
 
     }
 
@@ -53,18 +64,26 @@ public abstract class Entity extends Gravity {
         this.x = x;
     }
 
-    public void addY(int y)
-    {
-        this.yVelocity+=y;
+    public void addY(int y) {
+        this.yVelocity += y;
+    }
+
+    public void addX(int x) {
+        this.xVelocity += x;
     }
 
     public Rectangle getNewHitbox(int x, int y) {
-        return new Rectangle(this.x + x, this.y + y,32,32);
+        return new Rectangle(this.x + x, this.y + y, 32, 32);
     }
 
     public void killVelocity() {
-        yVelocity =0;
-        xVelocity = 0;
+        yVelocity = 0;
+        //  xVelocity =0;
 
+    }
+
+
+    public int getYVelocity() {
+        return yVelocity;
     }
 }

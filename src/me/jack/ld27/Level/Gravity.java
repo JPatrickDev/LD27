@@ -12,12 +12,24 @@ public abstract class Gravity {
 
     public static final int gravity = 5;
 
+    private int fallingSpeed = gravity;
+
+    protected boolean falling = false;
 
     public void apply(Entity e){
-        if(e.parent.canMove(e.getNewHitbox(0,gravity)))
-          e.addY(gravity);
-        else
+        if(e.getYVelocity() < 0){
+            return;
+        }
+        if(e.parent.canMove(e.getNewHitbox(0,fallingSpeed))){
+          e.addY(fallingSpeed);
+            fallingSpeed+=1;
+            falling = true;
+        }
+        else{
+            falling = false;
             e.killVelocity();
+            fallingSpeed = gravity;
+        }
     }
 
 }

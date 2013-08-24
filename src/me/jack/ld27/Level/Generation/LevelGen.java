@@ -16,6 +16,12 @@ public class LevelGen {
         Level level = new Level(width, height);
         int y = height - 1;
         for (int x = 0; x != width - 1; x++) {
+
+            level.setBlock(x, y, new Floor());
+        }
+       y= height - 5;
+        for (int x = 0; x != width - 1; x++) {
+            if(x < 10)continue;
             level.setBlock(x, y, new Floor());
         }
         level.setPlayer(new EntityPlayer(50, 50, level));
