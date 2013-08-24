@@ -24,8 +24,8 @@ public class EntityPlayer extends Entity implements Drawable{
     }
     private boolean floating()
     {
-        return false;
-     //   return !parent.canMove(getNewHitbox(0,1));
+
+     return false;//   return !parent.canMove(getNewHitbox(0,32));
     }
 
     //TODO: Gravity needs to make player flush with the floor, not floating a bit
@@ -34,9 +34,9 @@ public class EntityPlayer extends Entity implements Drawable{
         if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
 
             if(!falling && !floating()){
-            System.out.println("Spacebar");
-            if(getYVelocity() <= 0 )
-            this.addY(-10);
+
+            if(getYVelocity() >= 0 )
+            this.addY(-128);
             }
         }
 

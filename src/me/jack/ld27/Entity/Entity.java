@@ -17,6 +17,9 @@ public abstract class Entity extends Gravity {
     private float xVelocity;
     private float yVelocity;
 
+    private float targetXVelocity;
+    private float targetYVelocity;
+
     public Level parent;
     public int width = 32;
     public int height = 32;
