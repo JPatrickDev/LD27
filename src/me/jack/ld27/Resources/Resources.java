@@ -2,6 +2,7 @@ package me.jack.ld27.Resources;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 public class Resources {
 
     public static final HashMap<String, Image> imageResources = new HashMap<String, Image>();
+    public static final HashMap<String, Sound> soundResources = new HashMap<String, Sound>();
 
 
     public static int sheetWidth;
@@ -28,6 +30,11 @@ public class Resources {
         sheetWidth = i.getWidth() / 32;
         sheetHeight = i.getHeight() / 32;
         populateImages();
+        populateSounds();
+    }
+
+    private static void populateSounds() throws SlickException{
+        
     }
 
     public static void populateImages(){
@@ -44,5 +51,13 @@ public class Resources {
 
     public static Image getImageResource(String path){
         return imageResources.get(path);
+    }
+
+    public static void addSoundResource(String path, String id) throws SlickException {
+        soundResources.put(id,new Sound(path));
+    }
+
+    public static Sound getSoundResource(String path){
+        return soundResources.get(path);
     }
 }
