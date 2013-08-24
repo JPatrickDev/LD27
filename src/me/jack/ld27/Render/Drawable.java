@@ -6,6 +6,6 @@ package me.jack.ld27.Render;
  */
 public interface Drawable {
 
-    public abstract String getPath();
+    public abstract String getResourceId();
     public abstract boolean shouldRender();
 }

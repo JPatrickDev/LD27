@@ -8,7 +8,8 @@ public class Floor extends Block{
 
 
     public Floor() {
-        super(1,true);
+        super(Blocks.FLOOR);
+        setResourceId("floor");
     }
 
 }

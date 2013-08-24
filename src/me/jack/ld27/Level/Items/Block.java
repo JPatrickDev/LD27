@@ -10,25 +10,51 @@ public class Block implements Drawable{
 
     private int id;
     private boolean solid;
-    private String imgPath;
+    private String humanName;
+    private String resourceId;
 
-    public Block(int id, boolean solid) {
-        this.id = id;
-        this.solid = solid;
+
+    private int x;
+    private int y;
+
+    public Block(Blocks type) {
+        this.id = type.getId();
+        this.solid = type.isSolid();
+        this.humanName = type.getHumanName();
     }
 
-    public void setPath(String path) {
-        this.imgPath = path;
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
     }
 
 
     @Override
-    public String getPath() {
-        return imgPath;
+    public String getResourceId() {
+        return resourceId;
     }
 
     @Override
     public boolean shouldRender() {
      return true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 }
