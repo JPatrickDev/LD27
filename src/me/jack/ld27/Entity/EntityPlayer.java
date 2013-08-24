@@ -36,7 +36,7 @@ public class EntityPlayer extends Entity implements Drawable{
             if(!falling && !floating()){
 
             if(getYVelocity() >= 0 )
-            this.addY(-128);
+            this.addY(-96);
             }
         }
 
