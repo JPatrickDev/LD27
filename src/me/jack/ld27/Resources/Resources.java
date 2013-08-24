@@ -32,6 +32,7 @@ public class Resources {
 
     public static void populateImages(){
         addImageResource(1,"floor");
+        addImageResource(2,"player");
     }
 
     public static void addImageResource(int i, String path) {
@@ -42,7 +43,6 @@ public class Resources {
     }
 
     public static Image getImageResource(String path){
-        System.out.println(imageResources.size());
         return imageResources.get(path);
     }
 }

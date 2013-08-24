@@ -10,6 +10,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.awt.Rectangle;
+
 /**
  * Author: Jack
  * Date: 24/08/13
@@ -36,6 +38,7 @@ public class InGame extends BasicGameState{
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         renderer.update();
+        currentLevel.update();
     }
 
     @Override

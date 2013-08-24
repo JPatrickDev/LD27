@@ -1,5 +1,6 @@
 package me.jack.ld27.Render;
 
+import me.jack.ld27.Entity.Entity;
 import me.jack.ld27.InGame;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Resources.Resources;
@@ -26,15 +27,17 @@ public class Renderer {
     }
 
     public void render(Graphics g, GameContainer container) {
-        for(int i = 0;i!= drawables.size();i++){
-            System.out.println(drawables.get(i));
-        }
+
         for (Drawable drawable : drawables) {
             if(drawable == null)continue;
             Image image = Resources.getImageResource(drawable.getResourceId());
             if (drawable instanceof Block) {
                 Block b = (Block) drawable;
                 g.drawImage(image, b.getX() *32, b.getY() *32);
+            }
+            if(drawable instanceof Entity){
+                Entity e = (Entity)drawable;
+                g.drawImage(image,e.getX(),e.getY());
             }
 
         }

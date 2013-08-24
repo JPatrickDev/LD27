@@ -57,4 +57,8 @@ public class Block implements Drawable{
     public void setY(int y) {
         this.y = y;
     }
+
+    public boolean isSolid() {
+        return solid;
+    }
 }
