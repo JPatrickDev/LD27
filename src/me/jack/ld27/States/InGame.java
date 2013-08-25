@@ -32,16 +32,34 @@ public class InGame extends BasicGameState {
 
     public int lifes = 3;
 
+    private boolean won = false;
 
     //number of levels+1
     private int maxLevel = 6;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
-        this.renderer = new Renderer(this);
-        levelComplete();
+
         Resources.init("/res/sprites.png");
+
     }
 
+    @Override
+    public void enter(GameContainer container, StateBasedGame game) throws SlickException {
+        super.enter(container, game);
+        init();
+    }
+
+    public void init(){
+
+        level = 1;
+        timeRemaining = 0;
+        lastTime = 10000;
+        score = 0;
+        lifes = 3;
+        won = false;
+        levelComplete();
+        this.renderer = new Renderer(this);
+    }
     int textX;
     int textY;
     @Override
@@ -68,23 +86,32 @@ public class InGame extends BasicGameState {
         textY = 25;
 
         if(currentLevel.getPlayer().getY() > 600)resetLevel();
+
+        if(lifes <= 0){
+            FINAL_SCORE = calculateFinalScore();
+            stateBasedGame.enterState(2);
+        }
+        if(won)stateBasedGame.enterState(3);
     }
 
     @Override
     public int getID() {
         return 1;
     }
-
+    public static int FINAL_SCORE = 0;
     public int calculateFinalScore(){
         int timeToSpare = timeRemaining;
         int pickupsCollected = score;
-        return timeToSpare * pickupsCollected;
+        return (timeToSpare * pickupsCollected)/100;
     }
+
 
     public void levelComplete() {
 
         try {
             if(level == maxLevel){
+                FINAL_SCORE = calculateFinalScore();
+                won = true;
                 return;
             }
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  level + ".png", this);

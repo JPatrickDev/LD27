@@ -13,7 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * Author: Jack
  * Date: 25/08/13
  */
-public class GameOver extends BasicGameState{
+public class VictoryScreen extends BasicGameState{
   
 
     @Override
@@ -24,9 +24,10 @@ public class GameOver extends BasicGameState{
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.setFont(LD27Game.FONT);
-      centerX(200,"GAME OVER!",graphics);
+      centerX(200,"You Win!",graphics);
         centerX(250,"Your final score was:" + InGame.FINAL_SCORE,graphics);
-        centerX(350,"You ran out of lives",graphics);
+        centerX(350,"You successfully completed",graphics);
+        centerX(400,"All the Levels!",graphics);
         centerX(500,"Press spacebar to play again",graphics);
 
     }
@@ -45,6 +46,6 @@ public class GameOver extends BasicGameState{
 
     @Override
     public int getID() {
-        return 2;
+        return 3;
     }
 }
