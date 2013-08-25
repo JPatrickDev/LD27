@@ -24,7 +24,9 @@ public class InGame extends BasicGameState {
 
     private int timeRemaining = 0;
 
-    private int level = 0;
+    private int level = 1;
+
+    public int score = 0;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.renderer = new Renderer(this);
@@ -62,11 +64,18 @@ public class InGame extends BasicGameState {
         return 1;
     }
 
+    public int calculateFinalScore(){
+        int timeToSpare = timeRemaining;
+        int pickupsCollected = score;
+        return timeToSpare * pickupsCollected;
+    }
+
     public void levelComplete() {
-        level++;
+
         try {
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  level + ".png", this);
             timeRemaining = timeRemaining + 10000;
+            level++;
         } catch (SlickException e) {
             e.printStackTrace();
         }

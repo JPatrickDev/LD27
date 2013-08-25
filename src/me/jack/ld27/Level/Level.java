@@ -6,12 +6,14 @@ import me.jack.ld27.InGame;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Level.Items.Blocks;
 import me.jack.ld27.Level.Items.Gate;
+import me.jack.ld27.Level.Items.Pickup;
 import me.jack.ld27.Render.Drawable;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,6 +36,7 @@ public class Level {
 
     public ArrayList<Rectangle> collisions = new ArrayList<Rectangle>();
 
+    public HashMap<Rectangle,Pickup> pickups = new HashMap<Rectangle,Pickup>();
     private InGame parent;
     public Level(int width, int height,InGame parent) {
         this.width = width;
@@ -55,12 +58,19 @@ public class Level {
         return player;
     }
 
+    public void addPickup(int x,int y){
+        Pickup p = (Pickup) getBlock(x,y);
+        pickups.put(new Rectangle(x*32,y*32,32,32),p);
+    }
 
     public void setBlock(int x, int y, Block block) {
         try{
+            if(block != null){
         block.setX(x);
         block.setY(y);
+            }
         tiles[x+y*width] = block;
+            if(block == null)return;
         if(block.isSolid()){
             collisions.add(new Rectangle(x * 32, y * 32, 32, 32));
         }
@@ -91,6 +101,14 @@ public class Level {
         if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return false;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}
+        }
+
+        for(Rectangle pickup: pickups.keySet()){
+            if(pickup.intersects(hitbox)){
+                Pickup p = pickups.get(pickup);
+                setBlock(p.getX(),p.getY(),null);
+                parent.score++;
+            }
         }
         return true;
     }

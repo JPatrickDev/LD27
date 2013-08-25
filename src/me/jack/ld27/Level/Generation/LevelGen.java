@@ -115,11 +115,13 @@ public class LevelGen {
                 } else if (Utils.isSameColour(pixel, new Color(0XFFD800))) {
                     level.setPlayer(new EntityPlayer(x * 32, y * 32, level));
                 } else if (Utils.isSameColour(pixel, new Color(0x0026FF))){
-                    if(new Random().nextInt(5) == 1)
+                    if(new Random().nextInt(5) == 1){
                     level.setBlock(x,y,new Pickup());
+                        level.addPickup(x,y);
+                    }
                 }else if(Utils.isSameColour(pixel, new Color(0x4CFF00))){
-                    System.out.println("Pickup");
                     level.setBlock(x,y,new Pickup());
+                    level.addPickup(x,y);
                 }
 
             }

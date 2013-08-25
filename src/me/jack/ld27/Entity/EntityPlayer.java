@@ -1,6 +1,7 @@
 package me.jack.ld27.Entity;
 
 import me.jack.ld27.Level.Level;
+import me.jack.ld27.Render.Animation;
 import me.jack.ld27.Render.Drawable;
 import org.lwjgl.input.Keyboard;
 
@@ -10,10 +11,23 @@ import org.lwjgl.input.Keyboard;
  */
 public class EntityPlayer extends Entity implements Drawable{
 
+    Animation runLeft;
+    Animation runRight;
+    Animation jump;
+    Animation fall;
+    Animation standing;
+    Animation current;
+
     public EntityPlayer(int x, int y,Level parent) {
         super(x, y,parent);
         this.width = 32;
         this.height = 30;
+        standing = new Animation(this,60,new String[]{"playerStanding"});
+
+        runLeft = new Animation(this,60,new String[]{"playerLeft1","playerLeft2","playerLeft3","playerLeft4"});
+        runRight = new Animation(this,60,new String[]{"playerRight1","playerRight2","playerRight3","playerRight4"});
+        jump = new Animation(this,60,new String[]{"playerJump1","playerJump2","playerJump3","playerJump4"});
+        fall = new Animation(this,60,new String[]{"playerFall1","playerFall2","playerFall3","playerFall4"});
     }
 
     @Override
