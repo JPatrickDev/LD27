@@ -1,5 +1,6 @@
-package me.jack.ld27;
+package me.jack.ld27.States;
 
+import me.jack.ld27.LD27Game;
 import me.jack.ld27.Level.Generation.LevelGen;
 import me.jack.ld27.Level.Level;
 import me.jack.ld27.Render.Renderer;
@@ -30,6 +31,10 @@ public class InGame extends BasicGameState {
     public int score = 0;
 
     public int lifes = 3;
+
+
+    //number of levels+1
+    private int maxLevel = 6;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.renderer = new Renderer(this);
@@ -41,6 +46,7 @@ public class InGame extends BasicGameState {
     int textY;
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        graphics.setFont(LD27Game.FONT);
         //render to screen
         renderer.render(graphics, gameContainer);
         graphics.drawString("Time remaining: " + ((timeRemaining) / 1000.0), textX,textY);
@@ -59,7 +65,7 @@ public class InGame extends BasicGameState {
         if(Keyboard.isKeyDown(Keyboard.KEY_RETURN))    currentLevel = LevelGen.generate(1,this);
 
         textX = (gameContainer.getWidth() / 2 ) - (gameContainer.getGraphics().getFont().getWidth("Time remaining: " + ((timeRemaining) / 1000)) /2);
-        textY = 50;
+        textY = 25;
 
         if(currentLevel.getPlayer().getY() > 600)resetLevel();
     }
@@ -78,6 +84,9 @@ public class InGame extends BasicGameState {
     public void levelComplete() {
 
         try {
+            if(level == maxLevel){
+                return;
+            }
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  level + ".png", this);
             if(timeRemaining > 0)
             lastTime = timeRemaining;
@@ -93,7 +102,8 @@ public class InGame extends BasicGameState {
     public void resetLevel(){
         try {
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  (level-1) + ".png", this);
-            timeRemaining = lastTime;
+            System.out.println(lastTime);
+            timeRemaining =10000+ lastTime;
             lifes--;
         } catch (SlickException e) {
             e.printStackTrace();

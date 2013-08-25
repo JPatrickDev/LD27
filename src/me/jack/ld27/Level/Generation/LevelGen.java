@@ -2,7 +2,7 @@ package me.jack.ld27.Level.Generation;
 
 import me.jack.JEngine.Util.Utils;
 import me.jack.ld27.Entity.EntityPlayer;
-import me.jack.ld27.InGame;
+import me.jack.ld27.States.InGame;
 import me.jack.ld27.Level.Items.*;
 import me.jack.ld27.Level.Level;
 import org.newdawn.slick.Color;

@@ -2,9 +2,8 @@ package me.jack.ld27.Level;
 
 import me.jack.JEngine.Level.Camera;
 import me.jack.ld27.Entity.EntityPlayer;
-import me.jack.ld27.InGame;
+import me.jack.ld27.States.InGame;
 import me.jack.ld27.Level.Items.Block;
-import me.jack.ld27.Level.Items.Blocks;
 import me.jack.ld27.Level.Items.Gate;
 import me.jack.ld27.Level.Items.Pickup;
 import me.jack.ld27.Render.Drawable;

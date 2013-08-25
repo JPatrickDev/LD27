@@ -1,11 +1,9 @@
 package me.jack.ld27.Render;
 
 import me.jack.ld27.Entity.Entity;
-import me.jack.ld27.InGame;
 import me.jack.ld27.Level.Items.Block;
-import me.jack.ld27.Level.Items.Floor;
-import me.jack.ld27.Level.Items.Gate;
 import me.jack.ld27.Resources.Resources;
+import me.jack.ld27.States.InGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -33,7 +31,6 @@ public class Renderer {
 
     public void render(Graphics g, GameContainer container) {
 
-        int i = 0;
         for (Drawable drawable : drawables) {
             if (drawable == null) continue;
             Image image = Resources.getImageResource(drawable.getResourceId());
@@ -41,11 +38,6 @@ public class Renderer {
             if (drawable instanceof Block) {
                 Block b = (Block) drawable;
                 g.drawImage(image, (b.getX() * 32) - parent.currentLevel.camera.x, (b.getY() * 32) - parent.currentLevel.camera.y);
-                if (b instanceof Floor) {
-                    g.drawString(i + "", (b.getX() * 32) - parent.currentLevel.camera.x, (b.getY() * 32) - parent.currentLevel.camera.y);
-    i++;
-                }
-
             }
             if (drawable instanceof Entity) {
                 Entity e = (Entity) drawable;

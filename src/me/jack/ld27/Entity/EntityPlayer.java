@@ -40,7 +40,6 @@ public class EntityPlayer extends Entity implements Drawable {
         this.apply(this);
         checkMovement();
         applyAnim();
-        System.out.println(state.name());
     }
 
     private boolean floating() {
