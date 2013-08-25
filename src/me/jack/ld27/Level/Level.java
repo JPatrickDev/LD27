@@ -5,6 +5,7 @@ import me.jack.ld27.Entity.EntityPlayer;
 import me.jack.ld27.InGame;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Level.Items.Blocks;
+import me.jack.ld27.Level.Items.Gate;
 import me.jack.ld27.Render.Drawable;
 
 import java.awt.Point;
@@ -21,8 +22,8 @@ public class Level {
 
     private Block[] tiles;
 
-    private int width;
-    private int height;
+    public int width;
+    public int height;
 
     private EntityPlayer player;
 
@@ -43,6 +44,8 @@ public class Level {
     }
 
 
+
+
     public void setPlayer(EntityPlayer p){
 
         this.player = p;
@@ -61,7 +64,7 @@ public class Level {
         if(block.isSolid()){
             collisions.add(new Rectangle(x * 32, y * 32, 32, 32));
         }
-        }catch(Exception e){}
+        }catch(Exception e){if(block instanceof Gate)e.printStackTrace();}
     }
 
     public List<Drawable> getDrawables(){
@@ -117,4 +120,7 @@ public class Level {
     }
 
 
+    public Block getBlock(int x, int y) {
+        return tiles[x+y*width];
+    }
 }

@@ -17,8 +17,6 @@ public abstract class Entity extends Gravity {
     private float xVelocity;
     private float yVelocity;
 
-    private float targetXVelocity;
-    private float targetYVelocity;
 
     public Level parent;
     public int width = 32;
@@ -39,15 +37,25 @@ public abstract class Entity extends Gravity {
             xVelocity = 0;
         }
 
-        if(parent.canMove(getNewHitbox(0,yVelocity))){
-            y += yVelocity;
-        }else{
-            yVelocity = 0;
+        if(yVelocity > 0){
+
+            if(parent.canMove(getNewHitbox(0,15))){
+                y += 15;
+            }else{
+                yVelocity = 0;
+            }
+        }else if(yVelocity < 0){
+
+            if(parent.canMove(getNewHitbox(0,-(15)))){
+                y -= 15;
+            }else{
+                yVelocity = 0;
+            }
+
         }
 
-
         xVelocity *= 0.2;
-        yVelocity *= 0.2;
+        yVelocity *= 0.7;
 
         xVelocity = Math.round(xVelocity * 100) / 100;
         yVelocity = Math.round(yVelocity * 100) / 100;

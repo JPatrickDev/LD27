@@ -6,7 +6,7 @@ package me.jack.ld27.Level.Items;
  */
 public enum Blocks {
 
-    FLOOR(1,"Floor",true), GATE(2, "Gate", false),BOX(3,"Box",true);
+    FLOOR(1,"Floor",true), GATE(2, "Gate", false),BOX(3,"Box",true), PICKUP(4, "Pickup", false);
 
 
     private int id;

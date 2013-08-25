@@ -43,6 +43,7 @@ public class Resources {
         addImageResource(3,"gate1");
         addImageResource(4,"gate2");
         addImageResource(5,"box");
+        addImageResource(6,"pickup");
     }
 
     public static void addImageResource(int i, String path) {

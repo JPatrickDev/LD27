@@ -30,13 +30,12 @@ public class EntityPlayer extends Entity implements Drawable{
 
     //TODO: Gravity needs to make player flush with the floor, not floating a bit
     private void checkMovement(){
-        System.out.println(falling + " " + floating());
-        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+        if(Keyboard.isKeyDown(Keyboard.KEY_W)){
 
             if(!falling && !floating()){
 
             if(getYVelocity() >= 0 )
-            this.addY(-96);
+            this.addY(-72);
             }
         }
 
