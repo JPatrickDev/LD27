@@ -94,11 +94,12 @@ public class Level {
         if(endGate.intersects(getPlayer().getNewHitbox(0,0))){
             parent.levelComplete();
         }
+
     }
 
     public boolean canMove(Rectangle2D.Float hitbox){
         if((int)hitbox.x > (width*32-(int)hitbox.width) ||(int)hitbox.x < 0)return false;
-        if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return false;
+        if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return true;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}
         }

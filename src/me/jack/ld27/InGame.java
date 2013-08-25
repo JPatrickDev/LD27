@@ -23,10 +23,13 @@ public class InGame extends BasicGameState {
     public Level currentLevel;
 
     private int timeRemaining = 0;
+    private int lastTime = 10000;
 
     private int level = 1;
 
     public int score = 0;
+
+    public int lifes = 3;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         this.renderer = new Renderer(this);
@@ -50,13 +53,15 @@ public class InGame extends BasicGameState {
         timeRemaining -= i;
 
         if(timeRemaining  <= 0){
-            currentLevel.restart();
+           resetLevel();
         }
 
         if(Keyboard.isKeyDown(Keyboard.KEY_RETURN))    currentLevel = LevelGen.generate(1,this);
 
         textX = (gameContainer.getWidth() / 2 ) - (gameContainer.getGraphics().getFont().getWidth("Time remaining: " + ((timeRemaining) / 1000)) /2);
         textY = 50;
+
+        if(currentLevel.getPlayer().getY() > 600)resetLevel();
     }
 
     @Override
@@ -74,8 +79,22 @@ public class InGame extends BasicGameState {
 
         try {
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  level + ".png", this);
+            if(timeRemaining > 0)
+            lastTime = timeRemaining;
+            else
+            lastTime = 10000;
             timeRemaining = timeRemaining + 10000;
             level++;
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetLevel(){
+        try {
+            currentLevel = LevelGen.loadFromPNG("/res/maps/" +  (level-1) + ".png", this);
+            timeRemaining = lastTime;
+            lifes--;
         } catch (SlickException e) {
             e.printStackTrace();
         }
