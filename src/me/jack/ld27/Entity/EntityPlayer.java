@@ -3,6 +3,7 @@ package me.jack.ld27.Entity;
 import me.jack.ld27.Level.Level;
 import me.jack.ld27.Render.Animation;
 import me.jack.ld27.Render.Drawable;
+import me.jack.ld27.Resources.Resources;
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -37,9 +38,11 @@ public class EntityPlayer extends Entity implements Drawable {
     @Override
     public void update() {
         super.update();
+        last = state;
         this.apply(this);
         checkMovement();
         applyAnim();
+        if(last.name().equalsIgnoreCase("falling") && !state.name().equalsIgnoreCase("falling")) Resources.playSound("land");
     }
 
     private boolean floating() {
@@ -47,7 +50,9 @@ public class EntityPlayer extends Entity implements Drawable {
         return false;//   return !parent.canMove(getNewHitbox(0,32));
     }
 
+    PlayerState last;
     private void applyAnim() {
+
         if (state == PlayerState.JUMPING && current.id != 0) current = jump;
         if (state == PlayerState.FALLING && current.id != 3) current = fall;
         if (state == PlayerState.WALKLEFT && current.id != 1) current = runLeft;
@@ -57,7 +62,7 @@ public class EntityPlayer extends Entity implements Drawable {
 
     //TODO: Gravity needs to make player flush with the floor, not floating a bit
     private void checkMovement() {
-        if (getYVelocity() > 0) state = PlayerState.FALLING;
+
         if (getYVelocity() < 0) state = PlayerState.JUMPING;
         if (getYVelocity() == 0) /*|| getXVelocity() == 0)*/ state = PlayerState.STANDING;
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
@@ -79,6 +84,7 @@ public class EntityPlayer extends Entity implements Drawable {
             this.addX((float) 5);
             state = PlayerState.WALKRIGHT;
         }
+        if (getYVelocity() > 0) state = PlayerState.FALLING;
     }
 
     @Override

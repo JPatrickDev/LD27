@@ -102,9 +102,16 @@ public class InGame extends BasicGameState {
     public void resetLevel(){
         try {
             currentLevel = LevelGen.loadFromPNG("/res/maps/" +  (level-1) + ".png", this);
-            System.out.println(lastTime);
+
+            if(timeRemaining<=0){
+                if((level-1) ==1)
+                timeRemaining = lastTime;
+                else
+                    timeRemaining = lastTime + 10000;
+            }else
             timeRemaining =10000+ lastTime;
             lifes--;
+            Resources.playSound("death");
         } catch (SlickException e) {
             e.printStackTrace();
         }

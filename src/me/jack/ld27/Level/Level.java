@@ -2,6 +2,7 @@ package me.jack.ld27.Level;
 
 import me.jack.JEngine.Level.Camera;
 import me.jack.ld27.Entity.EntityPlayer;
+import me.jack.ld27.Resources.Resources;
 import me.jack.ld27.States.InGame;
 import me.jack.ld27.Level.Items.Block;
 import me.jack.ld27.Level.Items.Gate;
@@ -14,6 +15,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Author: Jack
@@ -35,7 +37,7 @@ public class Level {
 
     public ArrayList<Rectangle> collisions = new ArrayList<Rectangle>();
 
-    public HashMap<Rectangle,Pickup> pickups = new HashMap<Rectangle,Pickup>();
+    public ConcurrentHashMap<Rectangle,Pickup> pickups = new ConcurrentHashMap<Rectangle,Pickup>();
     private InGame parent;
     public Level(int width, int height,InGame parent) {
         this.width = width;
@@ -108,6 +110,8 @@ public class Level {
                 Pickup p = pickups.get(pickup);
                 setBlock(p.getX(),p.getY(),null);
                 parent.score++;
+                pickups.remove(pickup);
+                Resources.playSound("pickup");
             }
         }
         return true;
