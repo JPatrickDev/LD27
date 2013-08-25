@@ -13,17 +13,21 @@ public class Animation {
     private String[] resourceIds;
     private int currentFrame= 0;
     private int drawFor = 0;
-    public Animation(Entity parent, int framesPerFrame,String[] resourceIds){
+    public int id;
+
+    public Animation(Entity parent, int framesPerFrame,String[] resourceIds, int id){
         this.parent = parent;
         this.resourceIds = resourceIds;
         this.framesPerFrame = framesPerFrame;
+        this.id = id;
     }
 
     public void tick(){
         drawFor++;
-        if(drawFor == framesPerFrame){
-            if(currentFrame == resourceIds.length)currentFrame = 0;
+        if(drawFor >= framesPerFrame){
+            if(currentFrame == resourceIds.length-1)currentFrame = 0;
             else currentFrame++;
+            drawFor = 0;
         }
     }
 

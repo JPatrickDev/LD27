@@ -8,4 +8,5 @@ public interface Drawable {
 
     public abstract String getResourceId();
     public abstract boolean shouldRender();
+    public abstract void postRender();
 }

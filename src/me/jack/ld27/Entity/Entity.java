@@ -99,6 +99,10 @@ public abstract class Entity extends Gravity {
     public float getYVelocity() {
         return yVelocity;
     }
+    public float getXVelocity() {
+        return xVelocity;
+    }
+
 
     public  void killAllVelocity(){
         xVelocity = 0;

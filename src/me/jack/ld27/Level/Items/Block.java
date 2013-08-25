@@ -38,6 +38,9 @@ public class Block implements Drawable{
      return true;
     }
 
+    @Override
+    public void postRender() {}
+
     public int getId() {
         return id;
     }

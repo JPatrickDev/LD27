@@ -51,7 +51,7 @@ public class Renderer {
                 Entity e = (Entity) drawable;
                 g.drawImage(image, e.getX() - parent.currentLevel.camera.x, e.getY() - parent.currentLevel.camera.y);
             }
-
+            drawable.postRender();
         }
         if (debug) {
             Rectangle2D.Float rect = parent.currentLevel.getPlayer().getNewHitbox(0, 0);
