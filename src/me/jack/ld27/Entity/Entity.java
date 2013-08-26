@@ -22,6 +22,8 @@ public abstract class Entity extends Gravity {
     public int width = 32;
     public int height = 32;
 
+    public int xOffset = 0;
+    public int yOffset = 0;
     public Entity(int x, int y, Level parent) {
         this.x = x;
         this.y = y;
@@ -30,7 +32,8 @@ public abstract class Entity extends Gravity {
 
     public void update() {
         if (xVelocity > 50) xVelocity = 50;
-        if (yVelocity > 50) yVelocity = 50;
+        if (yVelocity > 84) yVelocity = 84;
+        if (yVelocity < -84) yVelocity = -84;
         if (parent.canMove(getNewHitbox(xVelocity,0))) {
             x += xVelocity;
         }else{
@@ -86,7 +89,7 @@ public abstract class Entity extends Gravity {
     }
 
     public Rectangle2D.Float getNewHitbox(float x, float y) {
-        return new Rectangle2D.Float(this.x + x, this.y + y, width, height);
+        return new Rectangle2D.Float((this.x + x) + xOffset, (this.y + y) + yOffset, width, height);
     }
 
     public void killVelocity() {

@@ -12,6 +12,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.io.File;
+
 /**
  * Author: Jack
  * Date: 24/08/13
@@ -35,7 +37,7 @@ public class InGame extends BasicGameState {
     private boolean won = false;
 
     //number of levels+1
-    private int maxLevel = 6;
+    private int maxLevel = new File("res/maps/").list().length+1;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
 
@@ -68,6 +70,7 @@ public class InGame extends BasicGameState {
         //render to screen
         renderer.render(graphics, gameContainer);
         graphics.drawString("Time remaining: " + ((timeRemaining) / 1000.0), textX,textY);
+        graphics.drawString("Lives remaining: " + lifes,textX,textY + 50);
     }
 
     @Override
@@ -85,7 +88,7 @@ public class InGame extends BasicGameState {
         textX = (gameContainer.getWidth() / 2 ) - (gameContainer.getGraphics().getFont().getWidth("Time remaining: " + ((timeRemaining) / 1000)) /2);
         textY = 25;
 
-        if(currentLevel.getPlayer().getY() > 600)resetLevel();
+        if(currentLevel.getPlayer().getY() > (currentLevel.height + 1)*32)resetLevel();
 
         if(lifes <= 0){
             FINAL_SCORE = calculateFinalScore();

@@ -1,6 +1,6 @@
 package me.jack.ld27.Level;
 
-import me.jack.JEngine.Level.Camera;
+
 import me.jack.ld27.Entity.EntityPlayer;
 import me.jack.ld27.Resources.Resources;
 import me.jack.ld27.States.InGame;
@@ -100,7 +100,7 @@ public class Level {
 
     public boolean canMove(Rectangle2D.Float hitbox){
         if((int)hitbox.x > (width*32-(int)hitbox.width) ||(int)hitbox.x < 0)return false;
-        if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return true;
+     //   if((int)hitbox.y > (600 - (int)hitbox.height) ||(int)hitbox.y < 0)return true;
         for(Rectangle collision : collisions){
             if(hitbox.intersects(collision)){return false;}
         }
@@ -112,7 +112,7 @@ public class Level {
                 parent.score++;
                 pickups.remove(pickup);
                 Resources.playSound("pickup");
-            }
+        }
         }
         return true;
     }

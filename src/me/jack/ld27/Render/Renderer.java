@@ -27,7 +27,7 @@ public class Renderer {
         this.parent = parent;
     }
 
-    public static boolean debug = true;
+
 
     public void render(Graphics g, GameContainer container) {
 
@@ -45,12 +45,7 @@ public class Renderer {
             }
             drawable.postRender();
         }
-        if (debug) {
-            Rectangle2D.Float rect = parent.currentLevel.getPlayer().getNewHitbox(0, 0);
-            g.setColor(Color.red);
-            g.drawRect(rect.x - parent.currentLevel.camera.x, rect.y - parent.currentLevel.camera.y, rect.width, rect.height);
-            g.setColor(Color.white);
-        }
+
     }
 
     public void update() {

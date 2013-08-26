@@ -23,8 +23,9 @@ public class EntityPlayer extends Entity implements Drawable {
 
     public EntityPlayer(int x, int y, Level parent) {
         super(x, y, parent);
-        this.width = 32;
-        this.height = 30;
+        this.width = 15;
+        this.height = 31;
+        this.xOffset = 9;
         standing = new Animation(this, 60, new String[]{"playerStanding"}, -1);
 
         runLeft = new Animation(this, 10, new String[]{"playerLeft1", "playerLeft2", "playerLeft3", "playerLeft4"}, 1);
