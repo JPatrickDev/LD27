@@ -1,0 +1,1 @@
+java -Djava.library.path="windows/" -jar Rush.jar
